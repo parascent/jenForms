@@ -1,0 +1,22 @@
+{
+  "name": "jenforms",
+  "version": "1.0.0",
+  "description": "Generate forms from input",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parascent/jenForms.git"
+  },
+  "author": "shaffaaf.ahmed@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/parascent/jenForms/issues"
+  },
+  "homepage": "https://github.com/parascent/jenForms#readme",
+  "dependencies": {
+    "vue": "^2.5.16"
+  }
+}
