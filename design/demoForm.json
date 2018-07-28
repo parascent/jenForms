@@ -1,0 +1,42 @@
+{
+    "form1":{
+        "model" : "item",
+        "fields":{
+            "status" : {
+                "type" :  "multiSelect",
+                "label" : "Status",
+                "validations" : {
+                    "required": true
+                },
+                "disableIf":{
+                    "name" : "notFilled",
+                    "noField":"filled"
+                },
+                "options": [
+                    {"label": "Option1", "value":"option1"},
+                    {"label": "Option2", "value":"option2"}
+                ]
+            },
+            "name" : {
+                "label" : "Status",
+                "type" :  "text",
+                "validations" : {
+                    "min-length": 28
+                }
+            },
+            "dob":{
+                "label":"Date of Birth",
+                "type":"date",
+                "format": "YYMMDD"
+            }
+        },
+        "design":{
+            "rows":{
+                "1":[{"status":"is-11"},{"name":"is-1"}],
+                "2":[{"dob":"is-12"}]
+            }
+        }
+        
+    }
+
+}

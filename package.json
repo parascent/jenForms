@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/parascent/jenForms#readme",
   "dependencies": {
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "vuelidate": "^0.7.4"
   }
 }
