@@ -15,7 +15,30 @@
                 "options": [
                     {"label": "Option1", "value":"option1"},
                     {"label": "Option2", "value":"option2"}
-                ]
+                ],
+                "optionLabels":{
+                    "label" : "label",
+                    "value" : "value"
+                }
+            },
+            "status2" : {
+                "type" :  "multiSelect",
+                "label" : "Status",
+                "validations" : {
+                    "required": true
+                },
+                "disableIf":{
+                    "name" : "notFilled",
+                    "noField":"filled"
+                },
+                "options": {
+                    "src" : {"model":"availableStatus"},
+                    "src" : {"url":"/api/availableStatus"}
+                },
+                "optionLabels":{
+                    "label" : "label",
+                    "value" : "value"
+                }
             },
             "name" : {
                 "label" : "Status",
@@ -37,6 +60,13 @@
             }
         }
         
+    },
+    
+    "itemModel":{
+        "id" : "",
+        "status":"",
+        "name": "",
+        "dob":""
     }
 
 }
