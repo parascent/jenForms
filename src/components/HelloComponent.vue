@@ -1,17 +1,22 @@
-<template>
-  <h1>Hello {{ name }}!</h1>
+<template lang="pug">
+  h1 | Hello {{name}}
 </template>
+
+
 <script>
-export default {
-  props: {
-    name: {
-      type: String,
-      required: true
+
+  export default {
+    props: {
+      name: {
+        type: String,
+        required: true
+      }
     }
   }
-}
 </script>
+
+
 <style lang="stylus" scoped>
-h1
-  color red
+  h1
+    color red
 </style>

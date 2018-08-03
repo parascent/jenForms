@@ -1,13 +1,26 @@
-<template>
-  <div class="full-width center-content">
-    <hello-component name="World" />
-  </div>
+<template lang="pug">  
+.full-width.center-content
+  jen-form(:fields="demoForm.fields",:model="demoForm.model",:design="demoForm.design")
+
 </template>
+
+
 <script>
-import HelloComponent from './components/HelloComponent.vue'
-export default {
-  components: {
-    HelloComponent
+
+  import HelloComponent from './components/HelloComponent.vue'
+  import JenForm from './components/JenForm.vue'
+  var demoForm = require ('../design/demoForm.json')
+  console.log(demoForm)
+
+  export default {
+    components: {
+      HelloComponent,
+      JenForm
+    },
+    data(){
+      return{
+        demoForm:demoForm,
+      }
+    }
   }
-}
 </script>

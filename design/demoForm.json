@@ -1,72 +1,72 @@
 {
-    "form1":{
-        "model" : "item",
-        "fields":{
-            "status" : {
-                "type" :  "multiSelect",
-                "label" : "Status",
-                "validations" : {
-                    "required": true
-                },
-                "disableIf":{
-                    "name" : "notFilled",
-                    "noField":"filled"
-                },
-                "options": [
-                    {"label": "Option1", "value":"option1"},
-                    {"label": "Option2", "value":"option2"}
-                ],
-                "optionLabels":{
-                    "label" : "label",
-                    "value" : "value"
-                }
-            },
-            "status2" : {
-                "type" :  "multiSelect",
-                "label" : "Status",
-                "validations" : {
-                    "required": true
-                },
-                "disableIf":{
-                    "name" : "notFilled",
-                    "noField":"filled"
-                },
-                "options": {
-                    "src" : {"model":"availableStatus"},
-                    "src" : {"url":"/api/availableStatus"}
-                },
-                "optionLabels":{
-                    "label" : "label",
-                    "value" : "value"
-                }
-            },
-            "name" : {
-                "label" : "Status",
-                "type" :  "text",
-                "validations" : {
-                    "min-length": 28
-                }
-            },
-            "dob":{
-                "label":"Date of Birth",
-                "type":"date",
-                "format": "YYMMDD"
-            }
-        },
-        "design":{
-            "rows":{
-                "1":[{"status":"is-11"},{"name":"is-1"}],
-                "2":[{"dob":"is-12"}]
-            }
-        }
-        
-    },
-    
-    "itemModel":{
+    "modelName":"item",
+    "model" : {
         "id" : "",
         "status":"",
         "name": "",
         "dob":""
+    },
+    "fields":{
+        "status" : {
+            "type" :  "multiSelect",
+            "label" : "Status",
+            "validations" : {
+                "required": true
+            },
+            "disableIf":{
+                "name" : "notFilled",
+                "noField":"filled"
+            },
+            "options": [
+                {"label": "Option1", "value":"option1"},
+                {"label": "Option2", "value":"option2"}
+            ],
+            "optionLabels":{
+                "label" : "label",
+                "value" : "value"
+            }
+        },
+        "status2" : {
+            "type" :  "multiSelect",
+            "label" : "Status",
+            "validations" : {
+                "required": true
+            },
+            "disableIf":{
+                "name" : "notFilled",
+                "noField":"filled"
+            },
+            "options": {
+                "src" : {"model":"availableStatus"},
+                "src" : {"url":"/api/availableStatus"}
+            },
+            "optionLabels":{
+                "label" : "label",
+                "value" : "value"
+            }
+        },
+        "name" : {
+            "label" : "Status",
+            "type" :  "text",
+            "validations" : {
+                "min-length": 28
+            }
+        },
+        "dob":{
+            "label":"Date of Birth",
+            "type":"date",
+            "format": "YYMMDD"
+        }
+    },
+    "design":{
+        "rows":{
+            "1":{
+                "status":{ "classes":["is-10","is-pink"]},
+                "name":{"classes":["is-2"]}
+            },
+            "2":{
+                "dob":{"classes":["is-12"]}
+            }
+        }
     }
-
 }
