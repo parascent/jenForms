@@ -20,6 +20,7 @@
   "homepage": "https://github.com/parascent/jenForms#readme",
   "dependencies": {
     "buefy": "^0.6.6",
+    "lodash": "^4.17.10",
     "vue": "^2.5.16",
     "vuelidate": "^0.7.4"
   },
