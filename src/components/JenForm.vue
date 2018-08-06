@@ -4,11 +4,30 @@
     .columns(v-for="row of design.rows") 
       .column(v-for="(column,columnKey) of row" v-bind:class="[row[columnKey].classes]")
         div(v-for="(field,fieldKey) of fields" v-if="columnKey == fieldKey" )
+          
           b-field(:label="field.label")
-            b-input.fillRight(v-if="field.type == 'text'",v-model="modelToProcess[fieldKey]")
-            b-datepicker.fillRight(v-if="field.type == 'date'",v-model="modelToProcess[fieldKey]")
-            b-select.fillRight(v-if="field.type == 'multiSelect'",v-model="modelToProcess[fieldKey]") 
-              option(v-if="Array.isArray(field.options)",v-for='option in field.options', :value='option[field.optionLabels.label]', :key='option[field.optionLabels.value]') {{option[field.optionLabels.label]}}
+
+            b-input.fillRight(
+                                v-if="field.type == 'text'",
+                                v-model="modelToProcess[fieldKey]"
+                              )
+
+            b-datepicker.fillRight(
+                                    v-if="field.type == 'date'",
+                                    v-model="modelToProcess[fieldKey]"
+                                  )
+
+            b-select.fillRight(
+                                  v-if="field.type == 'multiSelect'",
+                                  v-model="modelToProcess[fieldKey]"
+                              ) 
+              option(
+                      v-if="Array.isArray(field.options)",
+                      v-for='option in field.options', 
+                      :value='option[field.optionLabels.label]', 
+                      :key='option[field.optionLabels.value]') {{option[field.optionLabels.label]}}
+
+
     button.button(v-if="mode == 'new'" , @click="add()") Add
     button.button(v-if="mode == 'edit'" , @click="edit()")  Delete
     
@@ -16,7 +35,6 @@
 
 
 <script>
-import {cloneDeep} from 'lodash'
 var YYMMDD = function(a){
   return a
 }
