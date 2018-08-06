@@ -1,16 +1,26 @@
 #Todos
 
-#Component style normal Form
-  1.Form Object creation [x]
-  2.Form Creation [x]
-  3.Update and Add function [x]
-  4.Validation[]
+##Component style normal Form
+  - [x] Form Object creation
+  - [x] Form Creation 
+  - [x] Update and Add function 
+  - [ ] Validation
 
-#Form generated with render()
+###Partial Update Forms
+  - [ ] Form Object creation 
+  - [ ] Form Creation 
+  - [ ] Update and Add function 
+  - [ ] Validation
 
+##Form generated with render()
 
-#Partial Update Forms
-  1.Form Object creation [x]
-  2.Form Creation [x]
-  3.Update and Add function [x]
-  4.Validation[]
+  - [ ] Form Object creation
+  - [ ] Form Creation 
+  - [ ] Update and Add function 
+  - [ ] Validation
+
+###Partial Update Forms
+  - [ ] Form Object creation 
+  - [ ] Form Creation 
+  - [ ] Update and Add function 
+  - [ ] Validation
