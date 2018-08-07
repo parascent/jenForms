@@ -4,7 +4,8 @@
   - [x] Form Object creation
   - [x] Form Creation 
   - [x] Update and Add function 
-  - [x] Validation
+  - [x] Validation before create, update
+  - [ ] Realtime Validation
 
 ### Partial Update Forms
   - [ ] Form Object creation 
