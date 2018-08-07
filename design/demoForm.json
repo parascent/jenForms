@@ -46,7 +46,7 @@
             }
         },
         "name" : {
-            "label" : "Status",
+            "label" : "Name",
             "type" :  "text",
             "validations" : {
                 "min-length": 28

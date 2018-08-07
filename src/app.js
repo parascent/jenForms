@@ -5,7 +5,6 @@ import Vuelidate from 'vuelidate'
 import 'buefy/lib/buefy.css'
 
 Vue.use(Buefy)
-Vue.use(Vuelidate)
 
 
 

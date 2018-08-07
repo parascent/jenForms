@@ -4,7 +4,7 @@
   - [x] Form Object creation
   - [x] Form Creation 
   - [x] Update and Add function 
-  - [ ] Validation
+  - [x] Validation
 
 ### Partial Update Forms
   - [ ] Form Object creation 

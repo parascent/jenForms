@@ -1,6 +1,6 @@
 <template lang="pug">  
 .full-width.center-content
-  jen-form(:fields="demoForm.fields",:modelObj="demoForm.model",:design="demoForm.design", :modelName="demoForm.modelName" ,mode="new")
+  jen-form(:fields="demoForm.fields",:modelObj="demoForm.model",:design="demoForm.design", :modelName="demoForm.modelName" , :validationsObj="demoForm.validations",mode="new")
 
 </template>
 

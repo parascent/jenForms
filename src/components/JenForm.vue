@@ -9,17 +9,17 @@
 
             b-input.fillRight(
                                 v-if="field.type == 'text'",
-                                v-model="modelToProcess[fieldKey]"
+                                v-model="formFields[fieldKey]['model']"
                               )
 
             b-datepicker.fillRight(
                                     v-if="field.type == 'date'",
-                                    v-model="modelToProcess[fieldKey]"
+                                    v-model="formFields[fieldKey]['model']"
                                   )
 
             b-select.fillRight(
                                   v-if="field.type == 'multiSelect'",
-                                  v-model="modelToProcess[fieldKey]"
+                                  v-model="formFields[fieldKey]['model']"
                               ) 
               option(
                       v-if="Array.isArray(field.options)",
@@ -27,24 +27,33 @@
                       :value='option[field.optionLabels.label]', 
                       :key='option[field.optionLabels.value]') {{option[field.optionLabels.label]}}
 
+            template(v-if="validationErrors[fieldKey]")
+            .error(v-for="error in validationErrors[fieldKey]") {{error}}
+
 
     button.button(v-if="mode == 'new'" , @click="add()") Add
     button.button(v-if="mode == 'edit'" , @click="edit()")  Delete
     
+
 </template>
 
 
 <script>
+import validationDefinitions from '../helpers/validationDefinitions'
+
 var YYMMDD = function(a){
   return a
 }
+
+var modelToProcess = {}
+
 export default {
   name: "JenForm",
   props: {
     fields: {
       required: true
     },
-    validations: {
+    validationsObj: {
         required: false,
     },
     modelObj: {
@@ -66,42 +75,91 @@ export default {
       processingFunctions:{
         "YYMMDD" : YYMMDD
       },
-      fieldsToProcess: [],
       cssClassObj:{},
       testClassObj:{
         shit:true,
         shat:true
       },
       model:{},
-      modelToProcess:{},
+      formFields:{},
+      validationErrors:[],
+      
     }
   },
   methods:{
-    processValidationsProp(){},
-    processModel(){
+
+    processFormFields(){
       for(let field in this.fields){
         if(this.fields[field].format){
           let format = this.fields[field].format
           let processingFunction  = this.processingFunctions[format]
-          this.model[field] = processingFunction(this.modelToProcess[field])
+          this.model[field] = processingFunction(this.formFields[field].model)
         }else{
-          this.model[field] = this.modelToProcess[field]
+          this.model[field] = this.formFields[field].model
         }
       }
     },
+
+    validateAllFields(){
+      this.validationErrors = []
+      for(let field in this.formFields){
+        let formField = this.formFields[field]
+        if(formField.validations){
+          for(let validation in formField.validations){
+            if(formField.validations[validation](formField.model) !== true){
+              if(!this.validationErrors[field])
+                this.validationErrors[field] = {}
+
+              this.validationErrors[field][validation] = formField.validations[validation](formField.model)
+            }
+          }
+        }
+      }
+    },
+
     initModelObj(model){
+      let validationDefs = validationDefinitions()
       for(let field in this.modelObj){
         this.model[field] = ''
-        if(!this.fields[field]){
+
+        //if model field not in form fields then skip
+        if(!this.fields[field])
+        {
           continue
         }
-        this.modelToProcess[field] = this.fields[field].type == 'date' ? null : ''  
+
+        //
+        let processingField = this.fields[field]
+
+        //make form field
+        this.formFields[field] = {}
+        //asign currentformfield to var
+        let currentFormField = this.formFields[field]
+
+        currentFormField['model'] = processingField.type == 'date' ? null : ''
+
+        //associate validation functions
+        if(processingField.validations){
+          currentFormField['validations'] = {}
+          for(let validation in processingField.validations){
+            if(processingField.validations[validation] == true){
+              currentFormField.validations[validation] = validationDefs[validation]
+            }
+            else{
+              currentFormField.validations[validation] = validationDefs[validation](processingField.validations[validation], )
+            }
+          }
+        }
+
       }
+
     },
-    validate(){},
+    validateField(){
+
+    },
     add(){
-      this.validate()
-      this.processModel()
+      this.validateAllFields()
+      // this.processFormFields()
       // this.$store.dispatch(this.modelName+'/add', this.model).then((r)=>{
 
       // })
@@ -113,8 +171,9 @@ export default {
     },
 
   },
-  mounted(){
+  created(){
     this.initModelObj()
+    // this.initValidationObject()
     console.log('fields',this.fields)
     console.log('model',this.model)
     console.log('design',this.design)
