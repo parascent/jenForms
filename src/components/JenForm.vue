@@ -10,6 +10,7 @@
             b-input.fillRight(
                                 v-if="field.type == 'text'",
                                 v-model="formFields[fieldKey]['model']"
+                                @blur="validateField(fieldKey)"
                               )
 
             b-datepicker.fillRight(
@@ -28,7 +29,7 @@
                       :key='option[field.optionLabels.value]') {{option[field.optionLabels.label]}}
 
             template(v-if="validationErrors[fieldKey]")
-            .error(v-for="error in validationErrors[fieldKey]") {{error}}
+            .help.is-danger(v-for="error in validationErrors[fieldKey]") {{error}}
 
 
     button.button(v-if="mode == 'new'" , @click="add()") Add
@@ -40,6 +41,7 @@
 
 <script>
 import validationDefinitions from '../helpers/validationDefinitions'
+import Vue from 'vue'
 
 var YYMMDD = function(a){
   return a
@@ -69,6 +71,8 @@ export default {
       required: true
     }
   },
+
+
   data(){
     return {
       fieldClasses:{},
@@ -86,6 +90,8 @@ export default {
       
     }
   },
+
+
   methods:{
 
     processFormFields(){
@@ -100,20 +106,39 @@ export default {
       }
     },
 
+    validateField(field){
+      console.log(field)
+      let formField = this.formFields[field]
+      let fieldValidations = formField.validations
+
+      if(fieldValidations){
+
+        let existingErrors = this.validationErrors[field]
+        if(existingErrors){
+          this.validationErrors[field] = null
+          this.$forceUpdate()
+        }
+
+        for(let validation in fieldValidations){
+
+          let validationFunc = fieldValidations[validation]
+          let validationResult = validationFunc(formField.model)
+          if(validationResult !== true){
+            if(!this.validationErrors[field])
+              this.validationErrors[field] = {}
+            this.validationErrors[field][validation] = validationResult
+            this.$forceUpdate()
+          }
+
+        }
+      }
+
+    },
+
     validateAllFields(){
       this.validationErrors = []
       for(let field in this.formFields){
-        let formField = this.formFields[field]
-        if(formField.validations){
-          for(let validation in formField.validations){
-            if(formField.validations[validation](formField.model) !== true){
-              if(!this.validationErrors[field])
-                this.validationErrors[field] = {}
-
-              this.validationErrors[field][validation] = formField.validations[validation](formField.model)
-            }
-          }
-        }
+        this.validateField(field)
       }
     },
 
@@ -154,16 +179,16 @@ export default {
       }
 
     },
-    validateField(){
 
-    },
     add(){
+      console.log('Add')
       this.validateAllFields()
       // this.processFormFields()
       // this.$store.dispatch(this.modelName+'/add', this.model).then((r)=>{
 
       // })
     },
+
     update(){
       // this.$store.dispatch(this.modelName+'/update', this.model).then((r)=>{
 

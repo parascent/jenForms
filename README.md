@@ -5,7 +5,9 @@
   - [x] Form Creation 
   - [x] Update and Add function 
   - [x] Validation before create, update
-  - [ ] Realtime Validation
+  - [x] Realtime Validation
+  - [ ] Can be filled after field
+  - [ ] Should be filled if field
 
 ### Partial Update Forms
   - [ ] Form Object creation 
