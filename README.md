@@ -27,3 +27,9 @@
   - [ ] Form Creation 
   - [ ] Update and Add function 
   - [ ] Validation
+
+## Add components
+  - [ ] Searchable Select
+  - [ ] MultiSelect
+  - [ ] FileUpload
+  - [ ] FilePicker
